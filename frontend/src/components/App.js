@@ -5,7 +5,13 @@ import NoteContainer from './NoteContainer';
 class App extends Component {
 
   state = {
-    notes: []
+    notes: [],
+    currentNote: {}
+  }
+
+  setCurrentNote = (currentNote) => {
+    // debugger
+    this.setState({currentNote: currentNote})
   }
 
   componentDidMount() {
@@ -19,7 +25,10 @@ class App extends Component {
     return (
       <div className="app">
         <Header />
-        <NoteContainer notes={this.state.notes}/>
+        <NoteContainer
+          notes={this.state.notes}
+          currentNote={this.state.currentNote}
+          setCurrentNote={this.setCurrentNote} />
       </div>
     );
   }

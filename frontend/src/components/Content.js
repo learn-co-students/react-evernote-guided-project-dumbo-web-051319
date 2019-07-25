@@ -12,12 +12,13 @@ import Instructions from './Instructions';
 */
 class Content extends Component {
   renderContent = () => {
-    if (false) {
-      return <NoteEditor />;
+    console.log(this.props)
+    if (this.props) {
+      return <NoteViewer currentNote={this.props.currentNote}/>;
     } else if (false) {
-      return <NoteViewer />;
+      return <NoteEditor currentNote={this.props.currentNote}/>;
     } else {
-      return <Instructions />;
+      return <Instructions currentNote={this.props.currentNote}/>;
     }
   }
 
