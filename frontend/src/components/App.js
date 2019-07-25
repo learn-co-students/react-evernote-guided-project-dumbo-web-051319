@@ -6,12 +6,39 @@ class App extends Component {
 
   state = {
     notes: [],
-    currentNote: {}
+    currentNote: {},
+    noteToBeEdited: null
+  }
+
+  editNote = (note) => {
+    // debugger
+    this.setState({
+      noteToBeEdited: true
+    })
   }
 
   setCurrentNote = (currentNote) => {
     // debugger
-    this.setState({currentNote: currentNote})
+    this.setState({
+      currentNote: currentNote,
+      noteToBeEdited: false
+    })
+  }
+
+  fetchEditNote = (id, note) => {
+    // debugger
+    let config = {
+      method: 'PATCH',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        "id": id,
+        "title": note.title,
+        "body": note.body
+      })
+    }
+
+    fetch(`/api/v1/notes/${id}`, config)
+
   }
 
   componentDidMount() {
@@ -28,7 +55,11 @@ class App extends Component {
         <NoteContainer
           notes={this.state.notes}
           currentNote={this.state.currentNote}
-          setCurrentNote={this.setCurrentNote} />
+          noteToBeEdited={this.state.noteToBeEdited}
+          setCurrentNote={this.setCurrentNote}
+          editNote={this.editNote}
+          fetchEditNote={this.fetchEditNote}
+          />
       </div>
     );
   }

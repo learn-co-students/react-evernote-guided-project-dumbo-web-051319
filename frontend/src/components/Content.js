@@ -11,18 +11,24 @@ import Instructions from './Instructions';
           refactor to get this Content component to work.
 */
 class Content extends Component {
+
   renderContent = () => {
-    console.log(this.props)
     if (this.props) {
-      return <NoteViewer currentNote={this.props.currentNote}/>;
-    } else if (false) {
-      return <NoteEditor currentNote={this.props.currentNote}/>;
-    } else {
-      return <Instructions currentNote={this.props.currentNote}/>;
+      if (this.props.noteToBeEdited === false) {
+        return <NoteViewer
+        currentNote={this.props.currentNote}
+        editNote={this.props.editNote}
+        />;
+      } else if (this.props.noteToBeEdited === true) {
+        return <NoteEditor currentNote={this.props.currentNote} fetchEditNote={this.props.fetchEditNote} />;
+      } else {
+        return <Instructions currentNote={this.props.currentNote}/>;
+      }
     }
   }
 
   render() {
+    console.log(this.props)    
     return (
       <div className='master-detail-element detail'>
         {this.renderContent()}
