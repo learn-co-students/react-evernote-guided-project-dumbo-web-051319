@@ -13,14 +13,13 @@ class App extends Component {
     fetch('/api/v1/notes')
       .then((resp) => resp.json())
         .then((json) => this.setState({notes: json}))
-        // .then((json) => console.log(jso))
   }
 
   render() {
     return (
       <div className="app">
         <Header />
-        <NoteContainer />
+        <NoteContainer notes={this.state.notes}/>
       </div>
     );
   }
