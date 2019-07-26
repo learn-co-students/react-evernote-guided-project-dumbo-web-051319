@@ -10,6 +10,13 @@ class App extends Component {
     noteToBeEdited: null
   }
 
+  returnToViewer = () => {
+    // console.log(this.state);
+    // debugger
+    this.setState({noteToBeEdited: false})
+    // console.log(this.state.noteToBeEdited)
+  }
+
   editNote = (note) => {
     // debugger
     this.setState({
@@ -36,9 +43,7 @@ class App extends Component {
         "body": note.body
       })
     }
-
     fetch(`/api/v1/notes/${id}`, config)
-
   }
 
   componentDidMount() {
@@ -59,6 +64,7 @@ class App extends Component {
           setCurrentNote={this.setCurrentNote}
           editNote={this.editNote}
           fetchEditNote={this.fetchEditNote}
+          returnToViewer={this.returnToViewer}
           />
       </div>
     );

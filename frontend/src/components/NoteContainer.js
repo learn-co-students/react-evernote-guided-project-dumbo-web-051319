@@ -17,6 +17,7 @@ class NoteContainer extends Component {
             noteToBeEdited={this.props.noteToBeEdited}
             editNote={this.props.editNote}
             fetchEditNote={this.props.fetchEditNote}
+            returnToViewer={this.props.returnToViewer}
           />
         </div>
       </Fragment>

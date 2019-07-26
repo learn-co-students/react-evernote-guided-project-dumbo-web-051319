@@ -28,7 +28,7 @@ class NoteEditor extends Component {
   }
 
   render() {
-    // console.log(this.props)
+    console.log(this.props)
     return (
       <form className="note-editor" onSubmit={this.handleSubmit}>
         <input onChange={this.updateState} type="text" name="title" placeholder={this.props.currentNote.title} value={this.state.title} />
@@ -37,7 +37,7 @@ class NoteEditor extends Component {
         </ textarea>
         <div className="button-row">
           <input className="button" type="submit" value="Save" />
-          <button type="button">Cancel</button>
+          <button type="button" onClick={this.props.returnToViewer} >Cancel</button>
         </div>
       </form>
     );
