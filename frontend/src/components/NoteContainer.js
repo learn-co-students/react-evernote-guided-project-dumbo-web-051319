@@ -8,11 +8,12 @@ class NoteContainer extends Component {
     // debugger
     return (
       <Fragment>
-        <Search />
+        <Search search={this.props.search}/>
         <div className='container'>
           <Sidebar notes={this.props.notes}
             setCurrentNote={this.props.setCurrentNote}
             fetchCreateNote={this.props.fetchCreateNote}
+            query={this.props.query}
           />
           <Content currentNote={this.props.currentNote}
             noteToBeEdited={this.props.noteToBeEdited}

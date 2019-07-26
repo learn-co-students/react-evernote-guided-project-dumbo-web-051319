@@ -7,7 +7,8 @@ class App extends Component {
   state = {
     notes: [],
     currentNote: {},
-    noteToBeEdited: null
+    noteToBeEdited: null,
+    query: ""
   }
 
   returnToViewer = () => {
@@ -69,6 +70,13 @@ class App extends Component {
     .then((json) => this.setState({notes: json}))
   }
 
+  search = (e) => {
+    // debugger
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
   componentDidMount() {
     this.getAllNotes()
   }
@@ -86,6 +94,8 @@ class App extends Component {
           fetchEditNote={this.fetchEditNote}
           returnToViewer={this.returnToViewer}
           fetchCreateNote={this.fetchCreateNote}
+          search={this.search}
+          query={this.state.query}
           />
       </div>
     );

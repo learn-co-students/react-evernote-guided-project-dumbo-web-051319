@@ -1,15 +1,29 @@
 import React from 'react';
 
-const Search = () => {
-  return (
-    <div className="filter">
+class Search extends React.Component {
+
+  state = {query: ""}
+
+  // handleChange = (e) => {
+  //   // debugger
+  //   this.props.search(this.state.query)
+  // }
+
+  render() {
+    return (
+      <div className="filter">
       <input
-        id="search-bar"
-        type="text"
-        placeholder="Search Notes"
+      name="query"
+      value={this.state.value}
+      onChange={this.props.search}
+      id="search-bar"
+      type="text"
+      placeholder="Search Notes"
       />
-    </div>
-  );
+      </div>
+    );
+
+  }
 }
 
 export default Search;
