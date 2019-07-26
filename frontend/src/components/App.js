@@ -12,10 +12,7 @@ class App extends Component {
   }
 
   returnToViewer = () => {
-    // console.log(this.state);
-    // debugger
     this.setState({noteToBeEdited: false})
-    // console.log(this.state.noteToBeEdited)
   }
 
   editNote = (note) => {
@@ -43,7 +40,23 @@ class App extends Component {
       })
     }
     fetch(`/api/v1/notes/${id}`, config)
-      .then(() => this.setState({noteToBeEdited: false}))
+      .then((resp) => resp.json())
+        .then((json) => this.updateStateWithEdit(json))
+  }
+
+  updateStateWithEdit = (json) => {
+    let newNotes = this.state.notes.map((note) => {
+      if(note.id === json.id) {
+        return json
+      } else {
+        return note
+      }
+    })
+    this.setState({
+      notes: newNotes,
+      currentNote: json,
+      noteToBeEdited: false
+    })
   }
 
   fetchCreateNote = () => {
@@ -54,20 +67,15 @@ class App extends Component {
       body: JSON.stringify({
         title: "default",
         body: "placeholder",
-            })
-    }
-
+      })}
     fetch('/api/v1/notes', config)
-      .then((resp) => resp.json())
-        .then((json) => this.setState({
-          notes: [...this.state.notes, json]
-        }))
+      .then(() => this.getAllNotes())
   }
 
   getAllNotes = () => {
     fetch('/api/v1/notes')
-    .then((resp) => resp.json())
-    .then((json) => this.setState({notes: json}))
+      .then((resp) => resp.json())
+      .then((json) => this.setState({notes: json}))
   }
 
   search = (e) => {
@@ -98,7 +106,7 @@ class App extends Component {
           query={this.state.query}
           />
       </div>
-    );
+    )
   }
 
 }
