@@ -12,6 +12,7 @@ class NoteContainer extends Component {
         <div className='container'>
           <Sidebar notes={this.props.notes}
             setCurrentNote={this.props.setCurrentNote}
+            fetchCreateNote={this.props.fetchCreateNote}
           />
           <Content currentNote={this.props.currentNote}
             noteToBeEdited={this.props.noteToBeEdited}

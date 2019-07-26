@@ -25,7 +25,6 @@ class App extends Component {
   }
 
   setCurrentNote = (currentNote) => {
-    // debugger
     this.setState({
       currentNote: currentNote,
       noteToBeEdited: false
@@ -33,7 +32,6 @@ class App extends Component {
   }
 
   fetchEditNote = (id, note) => {
-    // debugger
     let config = {
       method: 'PATCH',
       headers: {'Content-Type': 'application/json'},
@@ -44,13 +42,35 @@ class App extends Component {
       })
     }
     fetch(`/api/v1/notes/${id}`, config)
+      .then(() => this.setState({noteToBeEdited: false}))
+  }
+
+  fetchCreateNote = () => {
+    // debugger
+    let config = {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        title: "default",
+        body: "placeholder",
+            })
+    }
+
+    fetch('/api/v1/notes', config)
+      .then((resp) => resp.json())
+        .then((json) => this.setState({
+          notes: [...this.state.notes, json]
+        }))
+  }
+
+  getAllNotes = () => {
+    fetch('/api/v1/notes')
+    .then((resp) => resp.json())
+    .then((json) => this.setState({notes: json}))
   }
 
   componentDidMount() {
-    // debugger
-    fetch('/api/v1/notes')
-      .then((resp) => resp.json())
-        .then((json) => this.setState({notes: json}))
+    this.getAllNotes()
   }
 
   render() {
@@ -65,6 +85,7 @@ class App extends Component {
           editNote={this.editNote}
           fetchEditNote={this.fetchEditNote}
           returnToViewer={this.returnToViewer}
+          fetchCreateNote={this.fetchCreateNote}
           />
       </div>
     );

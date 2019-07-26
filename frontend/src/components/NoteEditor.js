@@ -21,14 +21,11 @@ class NoteEditor extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    // console.log(this.props);
-    // console.log(this.state);
-    // console.log(this.props.fetchEditNote);
     this.props.fetchEditNote(this.props.currentNote.id, this.state)
   }
 
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <form className="note-editor" onSubmit={this.handleSubmit}>
         <input onChange={this.updateState} type="text" name="title" placeholder={this.props.currentNote.title} value={this.state.title} />

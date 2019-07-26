@@ -12,11 +12,12 @@ const NoteList = (props) => {
     })
   }
 
-  return (
-    <ul>
-      {makeNoteItems()}
-    </ul>
-  );
+    return (
+      <ul>
+        {makeNoteItems()}
+      </ul>
+    )
+
 }
 
 export default NoteList;
