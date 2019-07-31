@@ -28,7 +28,11 @@ class NoteEditor extends Component {
     // console.log(this.props)
     return (
       <form className="note-editor" onSubmit={this.handleSubmit}>
-        <input onChange={this.updateState} type="text" name="title" placeholder={this.props.currentNote.title} value={this.state.title} />
+        <input onChange={this.updateState}
+        type="text" name="title"
+        placeholder={this.props.currentNote.title}
+        value={this.state.title} />
+
         <textarea onChange={this.updateState} name="body" placeholder={this.props.currentNote.body} value={this.state.body} >
           {this.props.currentNote.body}
         </ textarea>

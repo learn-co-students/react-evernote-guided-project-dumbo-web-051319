@@ -8,7 +8,8 @@ class App extends Component {
     notes: [],
     currentNote: {},
     noteToBeEdited: null,
-    query: ""
+    query: "",
+    sortTerm: ""
   }
 
   returnToViewer = () => {
@@ -89,12 +90,26 @@ class App extends Component {
     this.getAllNotes()
   }
 
+  handleFilterChange = (term) => {
+    this.setState({sortTerm: term})
+  }
+
+  sortedNotes = () => {
+    if(this.state.sortTerm === "date") {
+      return this.state.notes
+      } else {
+      return this.state.notes.sort((a, b) => {
+        return a.title.toLowerCase().localeCompare(b.title.toLowerCase())
+      })
+    }
+  }
+
   render() {
     return (
       <div className="app">
         <Header />
         <NoteContainer
-          notes={this.state.notes}
+          notes={this.sortedNotes()}
           currentNote={this.state.currentNote}
           noteToBeEdited={this.state.noteToBeEdited}
           setCurrentNote={this.setCurrentNote}
@@ -104,6 +119,8 @@ class App extends Component {
           fetchCreateNote={this.fetchCreateNote}
           search={this.search}
           query={this.state.query}
+          sortTerm={this.state.sortTerm}
+          handleChange={this.handleFilterChange}
           />
       </div>
     )
