@@ -23,6 +23,7 @@ class Content extends Component {
         return <NoteEditor currentNote={this.props.currentNote}
                   fetchEditNote={this.props.fetchEditNote}
                   returnToViewer={this.props.returnToViewer}
+                  updateCurrentNote={this.props.updateCurrentNote}
                   />
       } else {
         return <Instructions currentNote={this.props.currentNote}/>

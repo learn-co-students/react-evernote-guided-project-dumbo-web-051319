@@ -12,6 +12,25 @@ class App extends Component {
     sortTerm: ""
   }
 
+  updateCurrentNoteState = (e) => {
+    if(e.target.name === "body") {
+      this.setState({currentNote: {
+        body: e.target.value,
+        title: this.state.currentNote.title,
+        id: this.state.currentNote.id,
+      }})
+    } else if (e.target.name === "title") {
+      this.setState({currentNote: {
+        title: e.target.value,
+        body: this.state.currentNote.body,
+        id: this.state.currentNote.id,
+      }})
+    }
+
+
+
+  }
+
   returnToViewer = () => {
     this.setState({noteToBeEdited: false})
   }
@@ -30,17 +49,17 @@ class App extends Component {
     })
   }
 
-  fetchEditNote = (id, note) => {
+  fetchEditNote = () => {
     let config = {
       method: 'PATCH',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        "id": id,
-        "title": note.title,
-        "body": note.body
+        "id": this.state.currentNote.id,
+        "title": this.state.currentNote.title,
+        "body": this.state.currentNote.body
       })
     }
-    fetch(`/api/v1/notes/${id}`, config)
+    fetch(`/api/v1/notes/${this.state.currentNote.id}`, config)
       .then((resp) => resp.json())
         .then((json) => this.updateStateWithEdit(json))
   }
@@ -125,6 +144,7 @@ class App extends Component {
           query={this.state.query}
           sortTerm={this.state.sortTerm}
           handleChange={this.handleFilterChange}
+          updateCurrentNote={this.updateCurrentNoteState}
           />
       </div>
     )
