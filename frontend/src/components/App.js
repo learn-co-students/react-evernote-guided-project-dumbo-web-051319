@@ -95,8 +95,15 @@ class App extends Component {
   }
 
   sortedNotes = () => {
+    // let sorted = []
     if(this.state.sortTerm === "date") {
-      return this.state.notes
+      // alert("This API does not render dates")
+      return this.state.notes.sort((a, b) => {
+        return new Date(b.created_at.slice(0,10)) - new Date(a.created_at.slice(0,10))
+      }
+    )
+    // debugger
+
       } else {
       return this.state.notes.sort((a, b) => {
         return a.title.toLowerCase().localeCompare(b.title.toLowerCase())
