@@ -3,11 +3,15 @@ class Api::V1::NotesController < ApplicationController
 
   def index
     notes = Note.all
-    render json: notes, status: 200
+    render json: notes
+    # , include: [:created_at]
+    # , status: 200
   end
 
   def create
     note = Note.create(note_params)
+    current_user = User.all.first
+    current_user.notes << note
     render json: note, status: 201
   end
 
